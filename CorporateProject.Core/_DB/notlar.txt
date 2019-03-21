@@ -1,0 +1,133 @@
+---Core Katmaný Aciklamalar---
+
+Core Katmanýnda diðer katmanlarda sadece implemente edilmesi adýna yazýlan temel bir yapý gibi düþünelebilir. Þöyle düþünelim formatlarýmýzý istediðimiz bir þekilde ya da kurallarda olmasý için validasyon iþlemlerinden faydalanýrýz. Þimdi istediðimiz kurallar neyse iþ katmanýna yazýlabilir çünkü iþ katmaný sonuçta database'ten aldýðýmýz datalarý için kontrol kýsmýdýr. Bu açýdan validasyon kurallarýmýzý göre kontrol yapmak için iþ katmanýnda istediðimiz format kurallarý yazabiliriz ve bu kurallarý yazdýktan sonra bu kurallarý doðrultusunda validasyon iþlemini yapacaz bu validasyon iþlem için gerekli yapýyý iþ katmanýda yazmak yerine çekirdek katmanda kullanacaðýmýz tool'a ya da kütüphane göre deðiþkenlik gösterebilmesini dikkate alarak gerekli yapýyý kurabiliriz ve bu sayede temel yapý oluþturulduktan sonra iþ katmanýnda sadece temel yapýya ait metot ya da özellikleri sadece çaðýrmamýz yeterli olacaktýr. Birebir iþ katmanýnda kullanabileceðimiz bir kütüphane düþünebiliriz.
+
+**--Core.DataAccessLayer=>DAL katmaný için temel yapýlar--
+
+**IEntityRepository
+
+**Repository Tasarým Deseni kullanýlýr
+
+**Repository Tasarým Deseni veritabaný sorgulama iþlemlerini merkezi bir yapý konulur ve ilgili DAL'da sadece implemente ederek veritabaný iþlemlerimizi gerçekleþtirmemizi yararý olan bir tasarým desenidir.Bu tasarým deseni ile temel Repository yapýsý oluþturarak baþka ORM'lerde farklýlýklar gerçekleþtirebilmek adýna bir interface oluþturuluruz.Yani NHibernate'de interface'den miras alýnarak ilgili metotlarý aldýktan sonra override olan metot içinde ilgili kodlarýmýzý yazabiliriz.
+
+public interface IEntityRepository where T:class,IEntity,new() {
+
+  List<T> GetAll(Expression<Func<bool,T>> filter=null) 
+  **Tüm datayý ister belirlediðimiz filtere göre istersek de filteresiz tüm datayý gösterecek metot.Filtereden kastýmýz da örnek 
+  
+  **verirsek ID'ye göre olabilir ya da sadece isimleri döndürmesi gibi söylenebilir
+ 
+  List<T> Get(Expression<Func<bool,T>> filter);
+  **Belirlediðimiz filtereye göre datalarý gösteren metot
+     
+  T Add(T t);
+  ** Veri ekleme için kullanýlan metot
+   
+  T Delete(T t);
+  ** Veri silme için kullanýlan metot
+   
+  T Update(T t);
+  ** Veriyi güncellemek için kullanýlan metot
+}
+
+**EntityFrameworkRepository
+
+public class EntityFrameworkRepository<TEntity,TContext>:IEntityRepository where TEntity:class,IEntity,new() where TContext:DbContext,new() {
+
+public List<TEntity> GetAll(Expression<Func<TEntity,bool>> filter= null)
+  {
+      using(TContext context=new TContext())
+      {
+         return filter!=null? context.Set<TEntity>().Where(filter).ToList():context.Set<TEntity>().ToList();
+         ** eðer belirli filtere varsa TEntity ile setlenmiþ veritabaný tablosu sýnýfýndan filtereye göre listeleme yapar ama filtre
+         ** yoksa direk veritabaný tablosu sýnýfýndan setlenip listelenir
+      }       
+   }
+   
+  public TEntity Add(TEntity entity)
+   {
+       using(TContext context=new TContext())
+        {
+           var type=context.Entry(entity);
+           type.State=EntityState.Add;
+           context.SaveChanges();
+           return entity;
+        }          
+   }
+   ** TEntity sýnfýmýz nesnemizi context'imizi adresleyip type denilen deðiþken atýyoruz daha sonra type deðiþkeni ile ekleme iþlemi
+      yapmak  durumu ekleme yapýyoruz ve daha sonra context'te oluþan deðiþikliði kaydetmek için SaveChanges metotu kullanýyoruz ve           sonuçta deðiþiklik veritabaný içindeki tablomuzda olacaðý için metot için parametre olarak aldýðýmýz table sýnýfýmýza ait               nesnemizi döndürüyoruz.
+      
+      
+  public TEntity Delete(TEntity entity)
+   { 
+      using(TContext context=new TContext())
+       {
+          var type=context.Entry(entity);
+          type.State=EntityState.Deleted;
+          context.SaveChanges();
+          return entity;
+       }
+   }
+   
+  public TEntity Update(TEntity entity)
+   {
+       using(TContext context=new TContext())
+        {
+          var type=context.Entry(entity);
+          type.State=EntityState.Modified;
+          context.SaveChanges();
+          return entity;         
+        }           
+   }
+   
+  public List<TEntity> Get(Expression<Func<TEntity,bool>> filter)
+   {
+       using(TContext context=new TContext())
+        {
+           return context.Set<TEntity>().Where(filter).ToList();
+        }
+   } 
+   
+}   
+NHibernate ORM için yazýlan Helper sýnýfý ve RepositoryBase(Repository Design Pattern)
+
+NHibernate Helper Sýnýfý
+
+**public abstract class NHibernateHelper //NHibernate ORM için bir class {
+
+ private static ISessionFactory _sessionFactory; 
+ ** ISessionFactory referans tipinde statik bir nesne
+     
+ public ISessionFactory SessionFactory
+ {
+    get
+    {
+      if(_sessionFactory==null)
+       {
+           _sessionFactory=InitialFactory();
+       }            
+    }
+  }
+  
+  **private olan nesneyi Kapsülleme yapýlýyor.Bu kapsüllemede de sadece istenilen deðer eðer boþ deðilse mapping yapacaðýmýz   
+  veritabanýn(MSSQL,MYSQL,ORACLE...) deðiþkenliðine göre nesneyi inital edecez
+  
+  public abstract ISessionFactory InitialFactory();
+  **Farklý veritabaný için oluþturacaðýmýz Helper sýnýfýnýn NHibernateHelper'den miras aldýktan sonra kullanacaðýmýz veritabanýna         göre metotumuzun içine ezmeyi gerçekleþtirebilmek ya da üzerinde deðiþiklik yapabilmemiz adýna metotumuz abstract yaptýk.
+  
+  **Miras ettiðimiz sýnýfta bu metotu override bir þekilde kullanmak zorunda kalacak.Bu da farklý sistemlere karþý esneklik
+  saðlayabilmemizi imkan saðlar.
+  
+  public virtual ISession OpenSession()
+  {
+     return SessionFactory.Open();        
+  }
+  **ORM aracýlýðýyla eriþtiðimiz mappingle veritabaný tablosu nesnesi üzerinde DML ya da diðer sorgularýmýzý yapabilmek için               veritabaný baðlantýsý açmak için kullanýlan yapýdýr.Böyle düþünelebilir
+  
+  public void Dispose()
+  {
+    GC.SupressFinale(this);
+    
+  }
+  **SessionFactory nesnesi kullanýmý ile alakalý iþlemlerimiz bittikten sonra hafýza da gereksiz yere yer kaplamamasý için                 GarbageCollector mekanizmasýný devreye sokmaya yararayan metot.this anahtar kelimesi class'ýmýzýn içinde kullandýðýmýz nesneyi           söylüyor diyebiliriz.
+**NHibernate RepositoryBase=>NHiberante aracýlýðýyla gerçekleþtirdiðimiz veritabaný sorgularýný merkez bir yapýyý oturtmak için kullanacaðýmýz sýnýf.Veritabaný sorgu iþlemleri yönetimi kolaylaþtýrmak için Repository Design Pattern kullanýlýyor diyebiliriz.

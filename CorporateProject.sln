@@ -1,0 +1,112 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateProject.Core", "CorporateProject.Core\CorporateProject.Core.csproj", "{DF6FB32A-5072-4A94-83CD-52C6E954835E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateProject.Entities", "CorporateProject.Entities\CorporateProject.Entities.csproj", "{1B293F40-8A4A-4844-A113-1638D1654274}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateProject.DataAccess", "CorporateProject.DataAccess\CorporateProject.DataAccess.csproj", "{3437B94D-8201-4397-928D-1B575CDBB18E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateProject.Business", "CorporateProject.Business\CorporateProject.Business.csproj", "{75AE39D4-4CBB-4DE3-9AD1-C177D4F59F8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateProject.MvcWebUI", "CorporateProject.MvcWebUI\CorporateProject.MvcWebUI.csproj", "{B0648484-20DC-479B-AF92-5AC5CBB5DE5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateProject.WebApi", "CorporateProject.WebApi\CorporateProject.WebApi.csproj", "{46EC6A02-E60A-4C2F-B6D6-8A89C10556E8}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "CorporateProject.WcfService", "CorporateProject.WcfService", "{BEF2C073-4EF2-4735-8B5B-68C41349057F}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{75AE39D4-4CBB-4DE3-9AD1-C177D4F59F8D}|CorporateProject.Business.dll;{DF6FB32A-5072-4A94-83CD-52C6E954835E}|CorporateProject.Core.dll;{3437B94D-8201-4397-928D-1B575CDBB18E}|CorporateProject.DataAccess.dll;{1B293F40-8A4A-4844-A113-1638D1654274}|CorporateProject.Entities.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64243"
+		Debug.AspNetCompiler.PhysicalPath = "CorporateProject.WcfService\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64243\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64243"
+		Release.AspNetCompiler.PhysicalPath = "CorporateProject.WcfService\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64243\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "64243"
+		SlnRelativePath = "CorporateProject.WcfService\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF6FB32A-5072-4A94-83CD-52C6E954835E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF6FB32A-5072-4A94-83CD-52C6E954835E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF6FB32A-5072-4A94-83CD-52C6E954835E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF6FB32A-5072-4A94-83CD-52C6E954835E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B293F40-8A4A-4844-A113-1638D1654274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B293F40-8A4A-4844-A113-1638D1654274}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B293F40-8A4A-4844-A113-1638D1654274}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B293F40-8A4A-4844-A113-1638D1654274}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3437B94D-8201-4397-928D-1B575CDBB18E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3437B94D-8201-4397-928D-1B575CDBB18E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3437B94D-8201-4397-928D-1B575CDBB18E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3437B94D-8201-4397-928D-1B575CDBB18E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75AE39D4-4CBB-4DE3-9AD1-C177D4F59F8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75AE39D4-4CBB-4DE3-9AD1-C177D4F59F8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75AE39D4-4CBB-4DE3-9AD1-C177D4F59F8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75AE39D4-4CBB-4DE3-9AD1-C177D4F59F8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0648484-20DC-479B-AF92-5AC5CBB5DE5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0648484-20DC-479B-AF92-5AC5CBB5DE5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0648484-20DC-479B-AF92-5AC5CBB5DE5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0648484-20DC-479B-AF92-5AC5CBB5DE5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46EC6A02-E60A-4C2F-B6D6-8A89C10556E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46EC6A02-E60A-4C2F-B6D6-8A89C10556E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46EC6A02-E60A-4C2F-B6D6-8A89C10556E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46EC6A02-E60A-4C2F-B6D6-8A89C10556E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEF2C073-4EF2-4735-8B5B-68C41349057F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEF2C073-4EF2-4735-8B5B-68C41349057F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEF2C073-4EF2-4735-8B5B-68C41349057F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEF2C073-4EF2-4735-8B5B-68C41349057F}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/rmznaras1993
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = CorporateProject.Business\\CorporateProject.Business.csproj
+		SccProjectName1 = CorporateProject.Business
+		SccLocalPath1 = CorporateProject.Business
+		SccProjectUniqueName2 = CorporateProject.Core\\CorporateProject.Core.csproj
+		SccProjectName2 = CorporateProject.Core
+		SccLocalPath2 = CorporateProject.Core
+		SccProjectUniqueName3 = CorporateProject.DataAccess\\CorporateProject.DataAccess.csproj
+		SccProjectName3 = CorporateProject.DataAccess
+		SccLocalPath3 = CorporateProject.DataAccess
+		SccProjectUniqueName4 = CorporateProject.Entities\\CorporateProject.Entities.csproj
+		SccProjectName4 = CorporateProject.Entities
+		SccLocalPath4 = CorporateProject.Entities
+		SccProjectUniqueName5 = CorporateProject.MvcWebUI\\CorporateProject.MvcWebUI.csproj
+		SccProjectName5 = CorporateProject.MvcWebUI
+		SccLocalPath5 = CorporateProject.MvcWebUI
+		SccWebProject6 = true
+		SccProjectUniqueName6 = CorporateProject.WcfService
+		SccProjectName6 = CorporateProject.WcfService
+		SccLocalPath6 = CorporateProject.WcfService
+		SccProjectEnlistmentChoice6 = 2
+		SccProjectUniqueName7 = CorporateProject.WebApi\\CorporateProject.WebApi.csproj
+		SccProjectName7 = CorporateProject.WebApi
+		SccLocalPath7 = CorporateProject.WebApi
+	EndGlobalSection
+EndGlobal

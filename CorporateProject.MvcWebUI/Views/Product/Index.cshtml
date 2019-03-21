@@ -1,0 +1,19 @@
+﻿@using CorporateProject.Entities.Concrete
+@model IEnumerable<CorporateProject.Entities.Concrete.Product>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div>
+     @foreach (Product product in Model)
+     {
+         @product.ProductName
+         <br/>
+     }
+</div>
+</body>
+</html>
