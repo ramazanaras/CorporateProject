@@ -1,4 +1,4 @@
-# SOLID ile, C#, ASP.NET MVC, Entity Framework, NHibernate, Postsharp, FluentValidation, AutoMapper, Ninject, Kurumsal Framework.
+# C#, ASP.NET MVC, Entity Framework, NHibernate, Postsharp, FluentValidation, AutoMapper, Ninject,SOLID, Kurumsal Framework.
 
 -Validation, Cache ve Transaction aspect geliştirme süreçlerinin C#,Fluent Validation,Ninject,PostSharp,MemoryCache ile tasarımı.
 
